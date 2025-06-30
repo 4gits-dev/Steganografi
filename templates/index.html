@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>LSBM Steganography</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+      <h1>🧠 LSBM Steganography Web Tool</h1>
+      <p>Embed or extract secret messages inside images</p>
+    </header>
+
+    <main class="frame-container">
+      <div class="container">
+        <div class="mode-buttons center-buttons">
+          <button onclick="showEmbed()">Embed Mode</button>
+          <button onclick="showExtract()">Extract Mode</button>
+        </div>
+
+        <div id="embed-section">
+          <section class="section">
+            <label for="original-image">Upload Original Image</label>
+            <input type="file" id="original-image" accept="image/*" />
+            <label for="original-image" class="custom-upload-button">📁 Browse for file ...</label>
+          </section>
+
+          <section class="section">
+            <label for="message">Secret Message</label>
+            <textarea id="message" placeholder="Type your secret message here..."></textarea>
+          </section>
+
+          <section class="section center-buttons">
+            <button onclick="embedMessage()">Embed Message</button>
+          </section>
+
+          <section class="image-preview-frame">
+            <h2>Image Preview</h2>
+            <div class="image-preview-container">
+              <div class="image-preview-left">
+                <div class="image-box large">
+                  <img id="embed-preview" src="" alt="Image Before Embed" />
+                </div>
+              </div>
+              <div class="image-preview-right">
+                <p><strong>Image Size:</strong> <span id="image-size">-</span></p>
+                <p><strong>Thumbnail preview</strong></p>
+                <div class="thumbnail-preview">
+                  <img id="embed-stego" src="" alt="Image After Embed" />
+                </div>
+                <div class="download-wrapper">
+                  <a id="download-stego" href="#" download="stego-image.png">
+                    <button class="download-button">Download Image</button>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <div id="extract-section" class="hidden">
+          <section class="section">
+            <label for="secret-image">Upload Secret Image (to Extract)</label>
+            <input type="file" id="secret-image" accept="image/*" />
+            <label for="secret-image" class="custom-upload-button">📁 Browse for file ...</label>
+          </section>
+
+          <section class="section">
+            <p class="extract-result-title">Result Extract Message</p>
+            <div class="extracted-image-frame">
+              <img id="extract-preview" src="" alt="Extracted Image" />
+            </div>
+            <section class="section center-buttons">
+              <button onclick="extractMessage()">Extract Message</button>
+            </section>
+            <div class="message-box">
+              <p><strong>Secret Message:</strong></p>
+              <p id="extracted-message" class="extracted-message-box"></p>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </body>
+</html>
